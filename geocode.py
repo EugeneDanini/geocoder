@@ -40,7 +40,8 @@ def process_city_file(city_name: str, country_name: str):
     # Process the DataFrame and fetch coordinates
     for i, row in df.iterrows():
         street, lat, lon = get_coordinates(row.get("original_street_name"), where)
-        df.at[i, "original_street_name"] = street
+        if street:
+            df.at[i, "original_street_name"] = street
         df.at[i, "street_centre_latitude"] = lat
         df.at[i, "street_centre_longitude"] = lon
         if lat and lon:
